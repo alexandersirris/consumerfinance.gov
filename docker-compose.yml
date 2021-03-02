@@ -29,7 +29,7 @@ services:
         ports:
             - 127.0.0.1:5601:5601
     postgres:
-        image: postgres:10-alpine
+        image: postgres:13-alpine
         user: postgres
         restart: always
         volumes:
@@ -46,7 +46,8 @@ services:
             context: .
             dockerfile: Dockerfile
             args:
-                scl_python_version: rh-python36
+                python_version: python36
+                postgres_version: postgresql13
         depends_on:
             - elasticsearch
             - elasticsearch2
@@ -54,6 +55,7 @@ services:
         stdin_open: true
         tty: true
         environment:
+            LANG: en_US.UTF-8
             ES7_HOST: elasticsearch
             ES_HOST: elasticsearch2
             ES_PORT: 9200
@@ -62,11 +64,13 @@ services:
         build:
             context: ./
             dockerfile: ./docker/docs/Dockerfile
+            args:
+                python_version: python36
         ports:
             - 127.0.0.1:8888:8888
         environment:
-            LANG: en_US.utf8
-            LC_ALL: en_US.utf8
+            LANG: en_US.UTF-8
+            LC_ALL: en_US.UTF-8
         volumes:
             - ./:/src/consumerfinance.gov
         entrypoint:
