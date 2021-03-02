@@ -55,7 +55,7 @@ services:
         stdin_open: true
         tty: true
         environment:
-            LANG: en_US.UTF-8
+            LANG: C.UTF-8
             ES7_HOST: elasticsearch
             ES_HOST: elasticsearch2
             ES_PORT: 9200
@@ -69,8 +69,8 @@ services:
         ports:
             - 127.0.0.1:8888:8888
         environment:
-            LANG: en_US.UTF-8
-            LC_ALL: en_US.UTF-8
+            LANG: C.UTF-8
+            LC_ALL: C.UTF-8
         volumes:
             - ./:/src/consumerfinance.gov
         entrypoint:
