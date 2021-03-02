@@ -1,7 +1,7 @@
-FROM centos:7
+FROM centos:8
 
 # Ensure that the environment uses UTF-8 encoding by default
-ENV LANG en_US.UTF-8
+ENV LANG C.UTF-8
 
 # Disables pip cache, which reduces build time, and suppresses warnings when
 # run as non-root.
@@ -22,15 +22,12 @@ RUN mkdir -p ${HOME} && chmod 777 ${HOME}
 # Install all build requirements including Python 3 and the latest
 # versions of the Python packages pip, setuptools, and wheel. Configure
 # Python 3 to be enabled at login.
-RUN yum -y update && \
-    yum install -y centos-release-scl && \
+RUN dnf -y update && \
     curl -sL https://rpm.nodesource.com/setup_12.x | bash - && \
     curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo && \
-    yum install -y rh-python36 gcc git nodejs yarn && \
-    echo "source scl_source enable rh-python36" > /etc/profile.d/scl_python.sh && \
+    dnf install -y python36 gcc git nodejs yarn && \
     source /etc/profile && \
-    pip install --no-cache-dir -U pip setuptools wheel && \
-    pip3 install --no-cache-dir -U pip setuptools wheel
+    pip3 install -U pip setuptools wheel
 
 COPY _build.sh docker-entrypoint.sh ./
 
