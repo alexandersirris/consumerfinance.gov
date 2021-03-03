@@ -36,6 +36,7 @@ RUN dnf -y install \
         gettext \
         ${PYTHON_VERSION} && \
     dnf clean all && rm -rf /var/cache/yum && \
+    alternatives --set python /usr/bin/python3 && \
     pip3 install -U pip setuptools wheel
 
 # Disables pip cache. Reduces build time, and suppresses warnings when run as non-root.
@@ -49,7 +50,7 @@ RUN pip3 install -r requirements/local.txt -r requirements/deployment.txt
 EXPOSE 8000
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
-CMD ["python3", "./cfgov/manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "./cfgov/manage.py", "runserver", "0.0.0.0:8000"]
 
 # Build Frontend Assets
 FROM cfgov-dev as cfgov-build
