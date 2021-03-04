@@ -87,7 +87,7 @@ pipeline {
 
                 script {
                     LAST_STAGE = env.STAGE_NAME
-                    docker.build(env.IMAGE_NAME_LOCAL, '--build-arg scl_python_version=rh-python36 --target cfgov-prod .')
+                    docker.build(env.IMAGE_NAME_LOCAL, '--build-arg python_version=python36 --target cfgov-prod .')
                     docker.build(env.IMAGE_NAME_ES2_LOCAL, '-f ./docker/elasticsearch/Dockerfile .')
                     docker.build(env.IMAGE_NAME_ES_LOCAL, '-f ./docker/elasticsearch/7/Dockerfile .')
                 }
@@ -175,7 +175,7 @@ pipeline {
                     LAST_STAGE = env.STAGE_NAME
                     timeout(time: 20, unit: 'MINUTES') {
                         // sh "docker-compose -f docker-compose.e2e.yml run e2e -e CYPRESS_baseUrl=https://${CFGOV_HOSTNAME}"
-                        sh "docker run -v ${WORKSPACE}/test/cypress:/app/test/cypress -v ${WORKSPACE}/cypress.json:/app/cypress.json -w /app -e CYPRESS_baseUrl=https://${CFGOV_HOSTNAME} -e CI=1 cypress/included:6.5.0 npx cypress run -b chrome --headless"
+                        sh "docker run -v ${WORKSPACE}/test/cypress:/app/test/cypress -v ${WORKSPACE}/cypress.json:/app/cypress.json -w /app -e CYPRESS_baseUrl=https://${CFGOV_HOSTNAME} -e CI=1 cypress/included:6.6.0 npx cypress run -b chrome --headless"
                     }
                 }
 
