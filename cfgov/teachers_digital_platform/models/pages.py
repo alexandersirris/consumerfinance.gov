@@ -19,7 +19,11 @@ from v1.models import CFGOVPage, CFGOVPageManager
 
 
 class ActivityPageActivityDocuments(Orderable):
-    project = ParentalKey('ActivityPage', on_delete=models.CASCADE, related_name='activity_documents')
+    project = ParentalKey(
+        'ActivityPage',
+        on_delete=models.CASCADE,
+        related_name='activity_documents'
+    )
 
     documents = models.ForeignKey(
         'wagtaildocs.Document',
@@ -34,7 +38,11 @@ class ActivityPageActivityDocuments(Orderable):
 
 
 class ActivityPageHandoutDocuments(Orderable):
-    project = ParentalKey('ActivityPage', on_delete=models.CASCADE, related_name='handout_documents')
+    project = ParentalKey(
+        'ActivityPage',
+        on_delete=models.CASCADE,
+        related_name='handout_documents'
+    )
 
     documents = models.ForeignKey(
         'wagtaildocs.Document',
