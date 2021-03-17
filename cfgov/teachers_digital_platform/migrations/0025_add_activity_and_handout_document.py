@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('wagtaildocs', '0010_document_file_hash'),
-        ('teachers_digital_platform', '0023_add_activity_setup'),
+        ('teachers_digital_platform', '0024_add_notification_type_option'),
     ]
 
     operations = [
