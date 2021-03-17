@@ -29,9 +29,8 @@
                 {{ result.activity_duration }}
             </div>
             {% if result.available_in_spanish %}
-            <div class="layout-row">
-                <h5 class="activity_meta-key">Activity type:</h5>
-                {{ result.available_in_spanish }}
+            <div class="layout-row u-mt15">
+                <strong>{{ _("Available in Spanish") }}</strong>
             </div>
             {% endif %}
         </div>

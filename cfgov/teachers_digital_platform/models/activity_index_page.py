@@ -338,9 +338,6 @@ class ActivitySetUp(models.Model):
         )
         self.card_order = [a.pk for a in base_query]
         for activity in base_query:
-            es = activity.activity_type.filter(
-                title='Available in Spanish'
-            ).first()
             payload = {
                 'url': activity.url,
                 'title': activity.title,
@@ -352,7 +349,9 @@ class ActivitySetUp(models.Model):
                 'summary': activity.summary,
                 'topic': activity.get_topics_list(),
                 'activity_duration': activity.activity_duration.title,
-                'available_in_spanish': 'Available in Spanish' if es else None,
+                'available_in_spanish': activity.activity_type.filter(
+                    title='Available in Spanish'
+                ).exists(),
                 'building_block': [
                     {'title': blk.title, 'svg_icon': blk.svg_icon}
                     for blk in activity.building_block.all()
