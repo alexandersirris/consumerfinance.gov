@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "--login", "-o", "pipefail", "-c"]
 
 # Install common OS packages
 RUN dnf -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm && \
-    curl -sL https://rpm.nodesource.com/setup_12.x | bash - && \
+    curl -sL https://rpm.nodesource.com/setup_14.x | bash - && \
     curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo && \
     dnf -y update && \
     dnf -y module disable postgresql
