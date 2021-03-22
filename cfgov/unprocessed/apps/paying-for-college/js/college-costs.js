@@ -12,7 +12,9 @@ import { financialView } from './views/financial-view.js';
 import { getQueryVariables } from './util/url-parameter-utils.js';
 import { navigationView } from './views/navigation-view.js';
 import { schoolView } from './views/school-view.js';
+import { stateModel } from './models/state-model.js';
 import { updateModelsFromQueryString } from './dispatchers/update-models.js';
+import { updateState } from './dispatchers/update-state.js';
 
 
 /**
@@ -20,10 +22,10 @@ import { updateModelsFromQueryString } from './dispatchers/update-models.js';
  */
 const init = function() {
   const body = document.querySelector( 'body' );
+  const queryObj = getQueryVariables();
   constantsModel.init();
   expensesModel.init();
   financialModel.init();
-
   schoolView.init( body );
   expensesView.init( body );
   financialView.init();
@@ -32,7 +34,7 @@ const init = function() {
   appView.init();
   Expandable.init();
 
-  updateModelsFromQueryString( getQueryVariables() );
+  updateModelsFromQueryString( queryObj );
 
   financialView.updateFinancialItems();
   appView.updateUI();
