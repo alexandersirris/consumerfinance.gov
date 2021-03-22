@@ -766,8 +766,6 @@ FLAGS = {
     "ASK_SURVEY_INTERCEPT": [],
     # Hide archive filter options in the filterable UI
     "HIDE_ARCHIVE_FILTER_OPTIONS": [],
-    # Enable ES as the backend for FilterableLists
-    "ELASTICSEARCH_FILTERABLE_LISTS": []
 }
 
 # Watchman tokens, a comma-separated string of tokens used to authenticate
