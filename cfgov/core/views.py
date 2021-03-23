@@ -8,6 +8,7 @@ from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.utils.translation import activate, get_language
 from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
 from django.views.decorators.http import require_http_methods
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormMixin
@@ -177,7 +178,11 @@ class ExternalURLNoticeView(FormMixin, TemplateView):
         if not form.is_valid():
             return self.raise_404()
 
-        return redirect(form.cleaned_data['validated_url'])
+        return HttpResponse(
+            "Not actually redirecting, but would be! "
+            f"{form.cleaned_data['validated_url']}"
+        )
+        # return redirect(form.cleaned_data['validated_url'])
 
     def raise_404(self):
         raise Http404(
